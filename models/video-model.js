@@ -34,5 +34,8 @@ const VideoSchema = new Schema({
     likes: Number,
     description: String,
     thumbnail: String
-
 })
+
+const Video = mongoose.model("Video", VideoSchema)
+
+module.exports = { Video }
