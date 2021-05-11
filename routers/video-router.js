@@ -47,7 +47,7 @@ router.route("/:id")
     video.__v = undefined;
     res.status(400).json({success: true, video})
 })
-.post(async (res, res) => {
+.post(async (req, res) => {
     let { video } = req;
     let videoUpdates = req.body
     video = extend(video, videoUpdates)
