@@ -31,13 +31,13 @@ router.param("id", async(req, res, next, id) => {
     try {
         const video = await Video.findById(id);
         if(!video) {
-            return res.status(404).json({success: false, message: "Could Not Find Product"})
+            return res.status(404).json({success: false, message: "Could Not Find Video"})
         }
         req.video = video;
         next()
     } catch(err) {
         console.log("Error Occurred :", err.message)
-        res.status(400).json({success: false, message: "Error Occurred While Retrieving Product", errMessage: err.message})
+        res.status(400).json({success: false, message: "Error Occurred While Retrieving Video", errMessage: err.message})
     }
 })
 

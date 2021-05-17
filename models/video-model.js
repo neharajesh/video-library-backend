@@ -12,7 +12,7 @@ const VideoSchema = new Schema({
         type: String,
         required: true
     },
-    duration: Date,
+    duration: String,
     tags: [{
         type: Schema.Types.ObjectId,
         required: true,
@@ -32,8 +32,7 @@ const VideoSchema = new Schema({
     },
     views: Number,
     likes: Number,
-    description: String,
-    thumbnail: String
+    description: String
 })
 
 const Video = mongoose.model("Video", VideoSchema)
