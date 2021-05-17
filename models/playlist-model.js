@@ -1,4 +1,6 @@
 const mongoose = require("mongoose")
+const { Video } = require("./video-model")
+const { User } = require("./user-model")
 const { Schema } = mongoose
 
 const PlaylistSchema = new Schema({

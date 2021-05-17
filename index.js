@@ -14,6 +14,7 @@ const PORT = process.env["PORT"]
 const videoRouter = require("./routers/video-router");
 const userRouter = require("./routers/user-router");
 const categoryRouter = require("./routers/category-router");
+const playlistRouter = require("./routers/playlist-router");
 
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
