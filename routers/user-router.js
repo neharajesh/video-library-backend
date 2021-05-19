@@ -5,6 +5,45 @@ const {extend} = lodash
 
 const { User } = require("../models/user-model")
 
+//signup => new users
+router.post("/signup", async (req, res) => {
+    const user = req.body
+    try {
+        //check if username is present in DB
+        const existingUser = User.find({username: user.username})
+        //if it is there, ask user to retype username
+        if(!existingUser) {
+            return res.json({success: false, message: "Username exists, choose another!"})
+        }
+        const newUser = new User(user)
+        const savedUser = await newUser.save()
+        return res.status(200).json({success: true, savedUser})
+        //if it is not there, add user details to db
+    } catch (err) {
+        console.log("Error Occurred while Signing up", err.message);
+    }
+})
+
+//signin
+router.post("/signin", async (req, res) => {
+    const user = req.body
+    try {
+        //check if user exists
+        const existingUser = await User.findOne({ username: user.username }).exec()
+        if(!existingUser) {
+            console.log("This user does not exist, signup")
+            return res.json({success: false, message: "This user does not exist, please signup to continue"})
+        }
+        if(existingUser.password === user.password) {
+            console.log("Password Matches")
+            return res.json({success: true, message: "Login successful", existingUser})
+        }
+        return res.json({success: false, message: "Login failed, recheck password"})
+    } catch (err) {
+        console.log("Error Occurred while Signing in", err.message)
+    }
+})
+
 //need to get particular users only
 router.param("id", async(req, res, next, id) => {
     try {

@@ -19,6 +19,7 @@ const playlistRouter = require("./routers/playlist-router");
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/categories", categoryRouter);
+app.use("/playlists", playlistRouter);
 
 app.get("/", (req, res) => {
     res.send("Video Library Backend")
