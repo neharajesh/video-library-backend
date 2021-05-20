@@ -9,7 +9,7 @@ router.route("/")
 .get(async(req, res) => {
     try {
         const playlists = await Playlist.find({})
-        res.status(200).json({success: true, playlists})
+        res.status(200).json({success: true, receivedData: playlists})
     } catch(err) {
         console.log("Error Occurred :", err.message)
         res.status(400).json({success: false, message: "Error Occurred Retrieving Playlists", errMessage: err.message})
@@ -20,7 +20,7 @@ router.route("/")
         const playlist = req.body
         const newPlaylist = new Playlist(playlist)
         const savePlaylist = await newPlaylist.save()
-        res.status(200).json({success: true, savePlaylist})
+        res.status(200).json({success: true, sentData: savePlaylist})
     } catch(err) {
         console.log("Error Occurred :", err.message)
         res.status(400).json({success: false, message: "Error Occurred While Adding Playlist", errMessage: err.message})
@@ -45,7 +45,7 @@ router.route("/:id")
 .get((req, res) => {
     let { playlist } = req;
     playlist.__v = undefined;
-    res.status(400).json({success: true, playlist})
+    res.status(400).json({success: true, receivedData: playlist})
 })
 .post(async (req, res) => {
     let { playlist } = req;
@@ -53,7 +53,7 @@ router.route("/:id")
     playlist = extend(playlist, playlistUpdates)
     try {
         playlist = await playlist.save()
-        res.status(200).json({success: true, playlist})
+        res.status(200).json({success: true, sentData: playlist})
     } catch (err) {
         res.status(400).json({success: false, message: "Error Occurred Updating Playlist", errMessage: err.message})
     }
