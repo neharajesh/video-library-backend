@@ -15,11 +15,19 @@ const videoRouter = require("./routers/video-router");
 const userRouter = require("./routers/user-router");
 const categoryRouter = require("./routers/category-router");
 const playlistRouter = require("./routers/playlist-router");
+const authRouter = require("./routers/auth-router");
+
+app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/categories", categoryRouter);
 app.use("/playlists", playlistRouter);
+app.use("/auth", authRouter);
 
 app.get("/", (req, res) => {
     res.send("Video Library Backend")
