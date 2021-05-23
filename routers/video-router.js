@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const lodash = require("lodash")
-const {extend} = lodash
+const { extend } = lodash
 
 const { Video } = require("../models/video-model")
 
@@ -45,7 +45,7 @@ router.route("/:id")
 .get((req, res) => {
     let { video } = req;
     video.__v = undefined;
-    res.status(400).json({success: true, receivedData: video})
+    res.status(200).json({success: true, receivedData: video})
 })
 .post(async (req, res) => {
     let { video } = req;

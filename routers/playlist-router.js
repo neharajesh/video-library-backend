@@ -27,9 +27,9 @@ router.route("/")
     }
 })
 
-router.param("id", async(req, res, next, id) => {
+router.param("videoId", async(req, res, next, videoId) => {
     try {
-        const playlist = await Playlist.findById(id);
+        const playlist = await Playlist.findById(videoId);
         if(!playlist) {
             return res.status(404).json({success: false, message: "Could Not Find Playlist"})
         }
@@ -41,11 +41,11 @@ router.param("id", async(req, res, next, id) => {
     }
 })
 
-router.route("/:id")
+router.route("/:videoId")
 .get((req, res) => {
     let { playlist } = req;
     playlist.__v = undefined;
-    res.status(400).json({success: true, receivedData: playlist})
+    res.status(200).json({success: true, receivedData: playlist})
 })
 .post(async (req, res) => {
     let { playlist } = req;

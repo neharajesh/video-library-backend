@@ -11,7 +11,7 @@ const initializeDbConnection = async () => {
         })
         console.log("DB Connection Successful")
     } catch (err) {
-        console.log("DB Connection Failed")
+        console.log("DB Connection Failed", err.message)
     }
 }
 

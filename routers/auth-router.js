@@ -40,10 +40,10 @@ router.route("/signin")
       const token = jwt.sign({id: user._id}, config.secret, {
           expiresIn: 86400
       })
-      res.status(200).json({
+      res.status(200).json({success: true, message: "login successful", user: {
           name: user.name,
           username: user.username,
-          auth_token: token
+          auth_token: token }
       })
       console.log(user)
   } catch (err) {
