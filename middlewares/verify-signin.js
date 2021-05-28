@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/auth-config.js");
 
 const { User } = require("../models/user-model")
+const secret = process.env["JWT_SECRET"]
 
 const verifyToken = (req, res, next) => {
     try {
@@ -18,5 +18,4 @@ const verifyToken = (req, res, next) => {
     }
 } 
 
-const authJWT = { verifyToken }
-module.exports = { authJWT };
+module.exports = { verifyToken }

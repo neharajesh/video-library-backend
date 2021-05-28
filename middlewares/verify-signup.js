@@ -1,16 +1,17 @@
 const { User } = require("../models/user-model")
 
-checkDuplicateUsername = async (req, res, next) => {
-    try{ 
-        const user = await User.findOne({username: req.body.username});
-        console.log(user)
-        if(user) {
-            return res.status(400).json({ success: false, message: "Username already in use, try another"})
+const checkExistingUsername = async(req, res, next) => {
+    try {
+        const user = req.body
+        const existingUser = await User.findOne({username: user.username})
+        if(!existingUser) {
+            next()
         }
-        next()
+        else res.json({success: false, message: "Username exists, try another"})
     } catch (err) {
-        return res.status(500).json({success: false, message: "Could not fetch details", errMessage: err.message})
+        console.log("Error occurred while checking for duplicate usernames")
+        res.json({success: false, message: "Error while checking duplicate username", errMessage: err.message})
     }
 }
 
-module.exports = { checkDuplicateUsername }
+module.exports = { checkExistingUsername }
