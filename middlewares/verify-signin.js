@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
         if(!token) {
             return res.status(403).json({success: false, message: "no token provided"})
         }
-        jwt.verify(token, config.secret, () => {
+        jwt.verify(token, secret, () => {
             req.userId = decoded.id;
             next()
         })
