@@ -10,7 +10,7 @@ router.route("/signup")
 .post(checkExistingUsername, async(req, res) => {
     try {
         const user = req.body
-        const newUser = new User({username: user.username, password: bcrypt.hashSync(user.password, 8)})
+        const newUser = new User({name: user.name, username: user.username, password: bcrypt.hashSync(user.password, 8), age: user.age})
         const savedUser = await newUser.save()
         res.json({success: true, message: "User signed up", data: savedUser})
     } catch (err) {
